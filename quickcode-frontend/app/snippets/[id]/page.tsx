@@ -10,7 +10,7 @@ interface SnippetPageProps {
   }
 }
 
-export default function SnippetPage({ params }: SnippetPageProps) {
+export default async function SnippetPage({ params }: SnippetPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950">
       <div className="container mx-auto px-4 py-8">

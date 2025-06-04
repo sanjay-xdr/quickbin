@@ -176,6 +176,9 @@ export function CodeEditor({ value, onChange, readOnly = false, height = "300px"
           <code className={`language-${language}`}>{highlightedCode}</code>
         </pre>
 
+<div style={{border:"1px solid red"}}>
+
+afasdfadsfadfs
         <textarea
           ref={textareaRef}
           value={value}
@@ -191,6 +194,7 @@ export function CodeEditor({ value, onChange, readOnly = false, height = "300px"
             caretColor: isDarkMode ? "#fcd34d" : "#b45309",
           }}
         />
+        </div>
       </div>
     </div>
   )

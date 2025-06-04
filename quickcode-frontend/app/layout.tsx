@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "quickCode - Share Code Snippets",
   description: "A minimal and beautiful code sharing platform",
-    generator: 'v0.dev'
+  
 }
 
 export default function RootLayout({
@@ -21,10 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           {children}
           <Toaster />
-        </ThemeProvider>
       </body>
     </html>
   )

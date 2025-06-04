@@ -27,6 +27,13 @@ interface ApiResponse {
 interface SnippetViewerProps {
   snippetId: string
 }
+ console.log(process.env.NEXT_PUBLIC_QUICKBIN_API_URL ," URL");
+
+ const URL=process.env.NEXT_PUBLIC_QUICKBIN_API_URL
+
+ if(!URL){
+  throw new Error("URL IS NOT DEFINED")
+ }
 
 export function SnippetViewer({ snippetId }: SnippetViewerProps) {
   const [snippet, setSnippet] = useState<Snippet | null>(null)
@@ -38,7 +45,7 @@ export function SnippetViewer({ snippetId }: SnippetViewerProps) {
     const fetchSnippet = async () => {
       try {
         // Simulate API call - replace with your actual API endpoint
-        const response = await fetch(`/api/snippets/${snippetId}`)
+        const response = await fetch(`${URL}/snippets/${snippetId}`)
         const data: ApiResponse = await response.json()
 
         if (data.success && data.data) {
@@ -202,7 +209,7 @@ export function SnippetViewer({ snippetId }: SnippetViewerProps) {
               </Alert>
             ) : (
               <div className="relative">
-                <CodeEditor value={snippet.content} readOnly={true} height="auto" />
+                <CodeEditor value={snippet.content} readOnly={true} height="1000px" />
               </div>
             )}
           </div>

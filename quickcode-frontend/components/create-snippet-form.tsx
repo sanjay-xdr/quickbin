@@ -21,6 +21,13 @@ const EXPIRY_OPTIONS = [
   { value: "7d", label: "7 days" },
   { value: "30d", label: "30 days" },
 ]
+ console.log(process.env.NEXT_PUBLIC_QUICKBIN_API_URL ," URL");
+
+ const URL=process.env.NEXT_PUBLIC_QUICKBIN_API_URL
+
+ if(!URL){
+  throw new Error("URL IS NOT DEFINED")
+ }
 
 interface ApiResponse {
   success: boolean
@@ -72,7 +79,9 @@ export function CreateSnippetForm() {
 
     try {
       // Simulate API call - replace with your actual API endpoint
-      const response = await fetch("/api/snippets", {
+
+     
+      const response = await fetch(`${URL}/snippets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,6 +94,7 @@ export function CreateSnippetForm() {
       })
 
       const data: ApiResponse = await response.json()
+      console.log("RESPONSE FROM API ", data);
 
       if (data.success && data.data) {
         toast({

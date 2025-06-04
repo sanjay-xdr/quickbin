@@ -16,7 +16,7 @@ export default function HomePage() {
               <p className="text-sm text-amber-700 dark:text-amber-300">Share code snippets instantly</p>
             </div>
           </div>
-          <ThemeToggle />
+    
         </header>
 
         <main className="max-w-4xl mx-auto">
