@@ -178,7 +178,7 @@ export function CodeEditor({ value, onChange, readOnly = false, height = "300px"
 
 <div style={{border:"1px solid red"}}>
 
-afasdfadsfadfs
+
         <textarea
           ref={textareaRef}
           value={value}

@@ -21,7 +21,6 @@ const EXPIRY_OPTIONS = [
   { value: "7d", label: "7 days" },
   { value: "30d", label: "30 days" },
 ]
- console.log(process.env.NEXT_PUBLIC_QUICKBIN_API_URL ," URL");
 
  const URL=process.env.NEXT_PUBLIC_QUICKBIN_API_URL
 

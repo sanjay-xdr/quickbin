@@ -27,19 +27,20 @@ interface ApiResponse {
 interface SnippetViewerProps {
   snippetId: string
 }
- console.log(process.env.NEXT_PUBLIC_QUICKBIN_API_URL ," URL");
+console.log(process.env.NEXT_PUBLIC_QUICKBIN_API_URL, " URL")
 
- const URL=process.env.NEXT_PUBLIC_QUICKBIN_API_URL
+const URL = process.env.NEXT_PUBLIC_QUICKBIN_API_URL
 
- if(!URL){
+if (!URL) {
   throw new Error("URL IS NOT DEFINED")
- }
+}
 
 export function SnippetViewer({ snippetId }: SnippetViewerProps) {
   const [snippet, setSnippet] = useState<Snippet | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState("")
   const [copied, setCopied] = useState(false)
+  const [linkcopied, setLinkCopied] = useState(false)
 
   useEffect(() => {
     const fetchSnippet = async () => {
@@ -148,6 +149,16 @@ export function SnippetViewer({ snippetId }: SnippetViewerProps) {
 
   const timeRemaining = getTimeRemaining(snippet.expires_at)
   const isExpired = timeRemaining === "Expired"
+  const snippetUrl =
+    typeof window !== "undefined" ? `${window.location.origin}${window.location.pathname}?id=${snippet.id}` : ""
+
+  const handleCopy = async () => {
+    if (snippetUrl) {
+      await navigator.clipboard.writeText(snippetUrl)
+      setLinkCopied(true)
+      setTimeout(() => setLinkCopied(false), 1200)
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -157,6 +168,28 @@ export function SnippetViewer({ snippetId }: SnippetViewerProps) {
             <div className="space-y-2">
               <CardTitle className="text-2xl text-amber-900 dark:text-amber-100">{snippet.title}</CardTitle>
               <CardDescription className="text-amber-700 dark:text-amber-300">Snippet ID: {snippet.id}</CardDescription>
+
+              <CardDescription className="text-amber-700 dark:text-amber-300">
+                Snippet Link : {snippetUrl}
+              </CardDescription>
+              <Button
+                onClick={handleCopy}
+                variant="outline"
+                size="sm"
+                className="border-amber-200 dark:border-amber-700 hover:bg-amber-50 dark:hover:bg-amber-900/50"
+              >
+                {linkcopied ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4 mr-2 text-green-600" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4 mr-2" />
+                    Copy URL
+                  </>
+                )}
+              </Button>
             </div>
             <div className="flex flex-col gap-2 items-end">
               <Badge
