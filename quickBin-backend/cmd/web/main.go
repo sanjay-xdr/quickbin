@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/lib/pq"
 )
@@ -15,7 +16,9 @@ func main() {
 	//add routes
 
 	// add handlers
-	db, err := sql.Open("postgres", "postgresql://quickcode_owner:npg_DTbW4lvwk6Gz@ep-square-rain-a8rb2c3q-pooler.eastus2.azure.neon.tech/quickcode?sslmode=require")
+	dbConnectionString := os.Getenv("DB_CONNECTION_STRING")
+
+	db, err := sql.Open("postgres", dbConnectionString)
 
 	if err != nil {
 		log.Fatal("Cannot connect to DB:", err)
